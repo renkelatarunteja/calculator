@@ -29,7 +29,7 @@ const Calculator = () => {
         readOnly
       />
       <div className="buttons">
-        {["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "="].map((value) => (
+        {["7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", "=","/"].map((value) => (
           <button key={value} onClick={() => handleButtonClick(value)}>
             {value}
           </button>
