@@ -8,7 +8,7 @@ const Calculator = () => {
   const handleButtonClick = (value) => {
     if (value === "=") {
       try {
-        setResult(eval(display).toString());
+        setResult(eval(display.replace(/[^-()\d/*+.]/g, '')).toString());
       } catch (error) {
         setResult("Error");
       }
@@ -29,7 +29,7 @@ const Calculator = () => {
         readOnly
       />
       <div className="buttons">
-        {["7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", "=","/"].map((value) => (
+        {["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", "+", "="].map((value) => (
           <button key={value} onClick={() => handleButtonClick(value)}>
             {value}
           </button>
