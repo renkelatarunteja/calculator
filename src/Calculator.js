@@ -4,45 +4,30 @@ import './Calculator.css';
 const Calculator = () => {
   const [input, setInput] = useState('');
 
-  const handleButtonPress = (value) => {
-    setInput(prevInput => prevInput + value);
-  };
-
-  const clearInput = () => {
-    setInput('');
-  };
-
-  const evaluateExpression = () => {
-    try {
-      const result = eval(input);
-      setInput(result.toString());
-    } catch (error) {
-      setInput('Error');
+  const handleButtonClick = (value) => {
+    if (value === '=') {
+      try {
+        const result = eval(input);
+        setInput(result.toString());
+      } catch (error) {
+        setInput('Error');
+      }
+    } else if (value === 'C') {
+      setInput('');
+    } else {
+      setInput(prevInput => prevInput + value);
     }
   };
 
   return (
-    <div className="React calculator">
+    <div className="calculator">
       <input type="text" value={input} readOnly />
       <div className="buttons">
-        <button onClick={() => handleButtonPress('7')}>7</button>
-        <button onClick={() => handleButtonPress('8')}>8</button>
-        <button onClick={() => handleButtonPress('9')}>9</button>
-        <button onClick={() => handleButtonPress('+')}>+</button>
-        <button onClick={() => handleButtonPress('4')}>4</button>
-        <button onClick={() => handleButtonPress('5')}>5</button>
-        <button onClick={() => handleButtonPress('6')}>6</button>
-        <button onClick={() => handleButtonPress('-')}>-</button>
-        <button onClick={() => handleButtonPress('1')}>1</button>
-        <button onClick={() => handleButtonPress('2')}>2</button>
-        <button onClick={() => handleButtonPress('3')}>3</button>
-        <button onClick={() => handleButtonPress('*')}>*</button>
-        <button onClick={clearInput}>C</button>
-        <button onClick={() => handleButtonPress('0')}>0</button>
-        
-        <button onClick={evaluateExpression}>=</button>
-        <button onClick={() => handleButtonPress('/')}>/</button>
-        
+        {[7, 8, 9, '+', 4, 5, 6, '-', 1, 2, 3, '*', 'C', 0, '/', '='].map(value => (
+          <button key={value} onClick={() => handleButtonClick(value)}>
+            {value}
+          </button>
+        ))}
       </div>
     </div>
   );
